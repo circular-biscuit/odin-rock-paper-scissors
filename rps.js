@@ -1,5 +1,4 @@
 
-
 //randomly returns either rock, paper, or scissors +++
 function computerPlay() {
 //declare array of rock, paper, & scissors +++ 
@@ -23,7 +22,6 @@ function playerPlay(){
             playerMove.toLowerCase() !== "scissors") {
             playerMove = prompt("please enter a VALID move: rock, paper, or scissors"); 
         } else {
-            console.log("your move is valid");
             validMove = true;
         }
     } while (!validMove);
@@ -32,14 +30,16 @@ function playerPlay(){
 }
 
 //function to play a round +++
-function playRound(playerSelection, computerSelection){
-//declare results variables +++
-    let computerWins, playerWins, draw;
-//initialize results variables as false +++
-    computerWins = false;
-    playerWins = false;
-    draw = false;
-
+function playRound(){
+//get user and computer selections
+    let playerSelection = playerPlay();
+    console.log("player's selection is " + playerSelection.toLowerCase());
+    let computerSelection = computerPlay();
+    console.log("computer's selection is " + computerSelection);
+//declare and initialize results variables +++
+    let computerWins = false;
+    let playerWins = false;
+    let draw = false;
 //apply game conditions +++
     if (computerSelection.toLowerCase() === "rock"){
         if (playerSelection.toLowerCase() === "scissors"){
@@ -68,27 +68,54 @@ function playRound(playerSelection, computerSelection){
             draw = true;
         }
     }
-// output booleans +++
-    console.log("playerWins = " + playerWins);
-    console.log("computerWins = " + computerWins);
-    console.log("draw = " + draw);
+//declare result variable to be returned
+    let result;
 //return with message +++ 
     if (computerWins === true){
-        return "you lose! " + computerSelection + " beats " + playerSelection.toLowerCase();
+        console.log("you lose! " + computerSelection + " beats " + playerSelection.toLowerCase());
+        result = "computer won";
+        return result;
     } else if (playerWins === true){
-        return "you win! " + playerSelection.toLowerCase() + " beats " + computerSelection;
+        console.log("you win! " + playerSelection.toLowerCase() + " beats " + computerSelection);
+        result = "player won";
+        return result;
     } else {
-        return "draw"
+        console.log("it's a draw!");
+        result = "draw";
+        return result;
     }
 }
 
+//function that plays specified number of game rounds and reports winner
+function game(){
+//initialise variables
+    let numberOfRounds = 5;
+    let computerScore = 0;
+    let playerScore = 0;
+    let result;
+//loop for number of rounds and score tally
+    for (let i=1; i<=numberOfRounds; i++){
+        result = playRound();
+        switch (result){
+            case "computer won":
+                computerScore += 1;
+                break;
+            case "player won":
+                playerScore += 1;
+                break;
+            case "draw":
+                break;
+        }
+        console.log("the current score is: computer= " + computerScore + " player= " + playerScore);
+    } 
+    if (computerScore>playerScore){
+        console.log("computer wins! try harder next time");
+    } else if (playerScore>computerScore){
+        console.log("you have triumphed! your trophy will arrive in 2-3 shipping days");
+    } else {
+        console.log("it's a tie! care for another go?");
+    }
+}
 
-
-//get player move and output in console
-let playerSelection = playerPlay();
-console.log("player's selection is " + playerSelection.toLowerCase());
-//get computer move and output in console +++
-let computerSelection = computerPlay();
-console.log("computer's selection is " + computerSelection);
-
-console.log(playRound(playerSelection, computerSelection));
+// call game function
+game();
