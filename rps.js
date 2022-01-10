@@ -1,54 +1,29 @@
-// //create rock button +++
-// const rockButton = document.createElement('button');
-// rockButton.textContent = 'i am rock button';
-// rockButton.addEventListener('click', playRound);
-// document.body.appendChild(rockButton);
-
-// //create paper button +++
-// const paperButton = document.createElement('button');
-// paperButton.textContent = 'i am paper button';
-// paperButton.addEventListener('click', playRound);
-// document.body.appendChild(paperButton);
-
-// //create scissors button
-// const scissorsButton = document.createElement('button');
-// scissorsButton.textContent = 'i am scissors button';
-// scissorsButton.addEventListener('click', playRound);
-// document.body.appendChild(scissorsButton);
-
-//function to get user's selection, check if it's valid 
-// function playerPlay(){
-// // //initialize boolean to check move validity +++
-// //     let validMove = false;
-// // //ask for player input +++    
-// //     let playerMove = prompt("please enter your move: rock, paper, or scissors");
-// // //check for valid input 
-// //     do {
-// //         if (playerMove.toLowerCase() !== "rock" &&
-// //             playerMove.toLowerCase() !== "paper"&&
-// //             playerMove.toLowerCase() !== "scissors") {
-// //             playerMove = prompt("please enter a VALID move: rock, paper, or scissors"); 
-// //         } else {
-// //             validMove = true;
-// //         }
-// //     } while (!validMove);
-
-//     let playerMove;
-// //assign player move according to which button is clicked 
-//     if (rockButton.addEventListener('click', ()=> {playerMove = "rock";})) {
-        
-//     } else if (paperButton.onclick === true) {
-//         playerMove = "paper";
-//     } else if (scissorsButton.onclick === true){
-//         playerMove = "scissors";
-//     }
-// //return user input +++
-//     return playerMove;
-// }
+//-----------------------------------------------------//
+// STYLING START
 
 //change body color
 const body = document.querySelector('body');
 body.style.backgroundColor = 'black';
+//make body flex display
+body.style.display = 'flex';
+body.style.flexDirection = 'column';
+body.style.padding = '16px';
+
+//position heading in center of header container
+const header = document.querySelector('#header');
+header.style.display = 'flex';
+header.style.justifyContent = 'center';
+header.style.textAlign = 'center';
+header.style.marginBottom = '8px';
+//style header 
+header.style.border = '4px dotted crimson';
+
+//style h1s
+const headings = document.querySelectorAll('h1');
+for (let i=0; i<headings.length; i++){
+    headings[i].style.color = 'white';
+    headings[i].style.fontFamily = 'monospace';
+}
 
 //align buttons in container
 const container = document.querySelector('#container');
@@ -57,17 +32,73 @@ container.style.justifyContent = 'space-around';
 //style container
 container.style.padding = '32px';
 container.style.border = '4px dotted aquamarine';
-container.style.backgroundColor = 'darkslategrey';
+container.style.marginBottom = '8px';
 
 //style buttons
 const buttons = document.querySelectorAll('button');
 for (let i=0; i<buttons.length; i++){
-    buttons[i].style.backgroundColor = 'darkseagreen';
+    buttons[i].style.backgroundColor = 'black';
     buttons[i].style.padding = '8px';
     buttons[i].style.borderRadius = '8px';
-    buttons[i].style.border = 'thin solid black';
+    buttons[i].style.border = 'thin solid white';
+    buttons[i].style.fontFamily = 'monospace';
+    buttons[i].style.fontWeight = 'bold';
+    buttons[i].style.color = 'white';
 }
 
+//style results container
+const results = document.querySelector('#results');
+results.style.display = 'flex';
+results.style.flexDirection = 'column';
+results.style.justifyContent = 'center';
+results.style.border = '4px dotted darkviolet';
+
+//style results heading
+const resultsHeading = document.querySelector('#resultsHeading');
+resultsHeading.style.display = 'flex';
+resultsHeading.style.textAlign = 'center';
+resultsHeading.style.justifyContent = 'center';
+
+//style score container
+const score = document.querySelector('#score');
+score.style.display = 'flex';
+score.style.justifyContent = 'space-around';
+score.style.color = 'white';
+score.style.fontFamily = 'monospace';
+
+//create results display box
+let resultsCounter = document.createElement('div');
+resultsCounter.style.display = 'flex';
+resultsCounter.style.justifyContent = 'space-around';
+results.appendChild(resultsCounter);
+
+//create computer score counter
+let computerCounter = document.createElement('h1');
+computerCounter.style.color = 'white';
+computerCounter.style.fontFamily = 'monospace';
+computerCounter.textContent = 0;
+resultsCounter.appendChild(computerCounter);
+
+//create player score counter
+let playerCounter = document.createElement('h1');
+playerCounter.style.color = 'white';
+playerCounter.style.fontFamily = 'monospace';
+playerCounter.textContent = 0;
+resultsCounter.appendChild(playerCounter);
+
+//create results message display box
+let resultsMessage = document.createElement('h2');
+resultsMessage.style.display = 'flex';
+resultsMessage.style.justifyContent = 'center';
+resultsMessage.style.color = 'white';
+resultsMessage.style.fontFamily = 'monospace';
+resultsMessage.style.textAlign = 'center';
+resultsMessage.textContent = 'place your wagers...';
+results.appendChild(resultsMessage);
+
+// STYLING END
+//-----------------------------------------------------//
+// GAME FUNCTIONALITY START
 
 //randomly returns either rock, paper, or scissors +++
 function computerPlay() {
@@ -78,14 +109,12 @@ function computerPlay() {
     //return random of array[0-2] +++
         return computerMove;
     }
-    
+
 //function to play a round +++
 function playRound(playerMove){
 //get user and computer selections +++
     let playerSelection = playerMove;
-    console.log("player's selection is " + playerSelection.toLowerCase());
     let computerSelection = computerPlay();
-    console.log("computer's selection is " + computerSelection);
 //declare and initialize results variables +++
     let computerWins = false;
     let playerWins = false;
@@ -122,68 +151,57 @@ function playRound(playerMove){
     let result;
 //return with message +++ 
     if (computerWins === true){
-        console.log("you lose! " + computerSelection + " beats " + playerSelection.toLowerCase());
+        resultsMessage.textContent = ("you lose! " + computerSelection + " beats " + playerSelection.toLowerCase());
         result = "computer won";
         return result;
     } else if (playerWins === true){
-        console.log("you win! " + playerSelection.toLowerCase() + " beats " + computerSelection);
+        resultsMessage.textContent = ("you win! " + playerSelection.toLowerCase() + " beats " + computerSelection);
         result = "player won";
         return result;
     } else {
-        console.log("it's a draw!");
+        resultsMessage.textContent = ("it's a draw!");
         result = "draw";
         return result;
     }
 }
 
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+
+rock.addEventListener('click', () => game('rock'));
+paper.addEventListener('click', () => game('paper'));
+scissors.addEventListener('click', () => game('scissors'));
+
+let computerScore = 0;
+let playerScore = 0;
+
 //function that plays specified number of game rounds and reports winner +++
-// function game(){
-// //initialise variables +++
-//     let numberOfRounds = 5;
-//     let computerScore = 0;
-//     let playerScore = 0;
-//     let result;
-//     result = playRound();
-//         switch (result){
-//             case "computer won":
-//                 computerScore += 1;
-//                 break;
-//             case "player won":
-//                 playerScore += 1;
-//                 break;
-//             case "draw":
-//                 break;
-//         }
-//         console.log("the current score is: computer= " + computerScore + " player= " + playerScore);
-// //loop for number of rounds and score tally +++
-//     // for (let i=1; i<=numberOfRounds; i++){
-        
-//     // } 
-//     if (computerScore>playerScore){
-//         console.log("computer wins! try harder next time");
-//     } else if (playerScore>computerScore){
-//         console.log("you have triumphed! your trophy will arrive in 2-3 shipping days");
-//     } else {
-//         console.log("it's a tie! care for another go?");
-//     }
-// }
+function game(playerMove){
+//initialise variables +++
+    let result;
+    if (computerScore<5 && playerScore<5){
+        result = playRound(playerMove);
+        switch (result){
+            case "computer won":
+                computerScore += 1;
+                if (computerScore === 5){
+                    resultsMessage.textContent = 'truly, life is the misery we endure between disappointments';
+                }
+                computerCounter.textContent = (computerScore);
+                break;
+            case "player won":
+                playerScore += 1;
+                if (playerScore === 5) {
+                    resultsMessage.textContent = "say one thing for you, say you're a winner";
+                }
+                playerCounter.textContent = (playerScore);
+                break;
+            case "draw":
+                break;
+        }
+    }
+}
 
-// call game function +++
-//game();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// GAME FUNCTIONALITY END
+//-----------------------------------------------------//

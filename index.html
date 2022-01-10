@@ -8,10 +8,27 @@
     <script src="rps.js" defer></script>
 </head>
 <body>
-    <div id="container">
-        <button onclick="playRound('rock')" id="rock">rock</button>
-        <button onclick="playRound('paper')" id="paper">paper</button>
-        <button onclick="playRound('scissors')" id="scissors">scissors</button>
+    <div id="header">
+        <h1>FIRST TO 5</h1>
     </div>
+    <div id="container">
+        <button id="rock">rock</button>
+        <button id="paper">paper</button>
+        <button id="scissors">scissors</button>
+    </div>
+    <div id="results">
+        <div id="resultsHeading">
+            <h1>THE SCORE IS</h1>
+        </div>
+        <div id='score'>
+            <div id="computerScore">
+                <h2>Computer</h2>
+            </div>
+            <div id="playerScore">
+                <h2>Player</h2>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
