@@ -1,0 +1,82 @@
+/*----------- GLOBAL -----------*/
+
+html {
+    background-color: black;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+* {
+    font-family: monospace;
+    color: white;
+}
+
+.main {
+    padding: 3% 30%;
+}
+
+h1 {
+    color: white;
+}
+
+/* style and position heading in center of header container */
+#header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+    border: 4px dotted crimson;
+}
+
+/* align and style buttons in container */
+#container {
+    display: flex;
+    justify-content: space-around;
+    padding: 32px;
+    border: 4px dotted aquamarine;
+    margin-bottom: 8px;
+}
+
+button {
+    font-family: monospace;
+    font-weight: bold;
+    background-color: black;
+    padding: 8px;
+    border: thin solid white;
+    border-radius: 8px;
+
+}
+
+button:hover {
+    background-color: crimson;
+}
+
+button:active{
+    transform: scale(1.1);
+}
+
+/* style results container */
+#results {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 4px dotted darkviolet;
+}
+
+/* position results heading */
+#resultsHeading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* position scores */
+#score {
+    display: flex;
+    justify-content: space-around;
+}
+
